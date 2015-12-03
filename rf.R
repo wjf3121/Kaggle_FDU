@@ -25,21 +25,60 @@ library(data.table)
 library(Metrics)
 h2o.init(nthreads=-1)
 
-## use data table to only read the Estimated, Ref, and Id fields
+mpalmer <- function(ref, minutes_past) {
+  # order reflectivity values and minutes_past
+  sort_min_index = order(minutes_past)
+  minutes_past <- minutes_past[sort_min_index]
+  ref <- ref[sort_min_index]
+  
+  # calculate the length of time for which each reflectivity value is valid
+  valid_time <-
+    c(minutes_past[-length(minutes_past)], 60) -
+    c(0, minutes_past[-length(minutes_past)])
+  valid_time = valid_time / 60
+
+  # calculate hourly rain rates using marshall-palmer weighted by valid times
+  return(sum(((10^(ref/10))/200)^0.625*valid_time, na.rm=TRUE))
+}
+
+rate_kdp <- function(Kdp, minutes_past) {
+  
+  # order Kdp values and minutes_past
+  sort_min_index = order(minutes_past)
+  minutes_past <- minutes_past[sort_min_index]
+  Kdp <- Kdp[sort_min_index]
+  
+  # calculate the length of time for which each Kdp value is valid
+  valid_time <-
+    c(minutes_past[-length(minutes_past)], 60) -
+    c(0, minutes_past[-length(minutes_past)])
+  valid_time = valid_time / 60
+
+  # calculate hourly rain rates using S and Z formula weighted by valid times
+  return(sum((sign(Kdp)*(4.06)*(abs(Kdp) **.0866)*valid_time), na.rm=TRUE))
+}
+
+
 print(paste("reading training file:",Sys.time()))
-train<-fread("C:/Users/Fighton/Desktop/train/train.csv",select=c(1,2,3,4,6,7,8,10,11,16,18, 19, 24))
+train<-fread("../train.csv",select=c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,24))
 
 #Cut off outliers of Expected >= 69
 train <- subset(train, Expected < 69)
 
 summary(train)
 
+# train$dt <- time_difference(train$minutes_past)
+# train$mp5 <- marshall_palmer(train$Ref_5x5_50th)
+# train$mp9 <- marshall_palmer(train$Ref_5x5_90th)
+
 #Cut off Ref values < 0
+train$Ref_5x5_50th[which(train$Ref_5x5_10th < 0)] <- NA
 train$Ref_5x5_50th[which(train$Ref_5x5_50th < 0)] <- NA
 train$Ref_5x5_90th[which(train$Ref_5x5_90th < 0)] <- NA
 train$RefComposite[which(train$RefComposite < 0)] <- NA
-train$RefComposite_5x5_50th[which(train$RefComposite_5x5_50th_5x5_50th < 0)] <- NA
-train$RefComposite_5x5_90th[which(train$RefComposite_5x5_50th_5x5_90th < 0)] <- NA
+train$RefComposite_5x5_10th[which(train$RefComposite_5x5_10th < 0)] <- NA
+train$RefComposite_5x5_50th[which(train$RefComposite_5x5_50th < 0)] <- NA
+train$RefComposite_5x5_90th[which(train$RefComposite_5x5_90th < 0)] <- NA
 train$Ref[which(train$Ref < 0)] <- NA
 
 cor(train, use = "pairwise.complete.obs")
@@ -47,62 +86,134 @@ summary(train)
 
 trainHex<-as.h2o(train[,.(
     dist   = mean(radardist_km, na.rm = T),
-     refArea5   = mean(Ref_5x5_50th, na.rm = T),
-     refArea9  = mean(Ref_5x5_90th, na.rm = T),
-     meanRefcomp = mean(RefComposite,na.rm=T),
-     meanRefcomp5 = mean(RefComposite_5x5_50th,na.rm=T),
-     meanRefcomp9 = mean(RefComposite_5x5_90th,na.rm=T),
-     zdr   = mean(Zdr, na.rm = T),
-     zdr5   = mean(Zdr_5x5_50th, na.rm = T),
-     zdr9   = mean(Zdr_5x5_90th, na.rm = T),
-     target = log1p(mean(Expected)),
-    meanRef = mean(Ref,na.rm=T),
-    sumRef = sum(Ref,na.rm=T),
+
+    refArea1   = mean(Ref_5x5_10th, na.rm = T),
+    varRefArea1   = var(Ref_5x5_10th, na.rm = T),
+    refArea5   = mean(Ref_5x5_50th, na.rm = T),
+    varRefArea5   = var(Ref_5x5_50th, na.rm = T),
+    refArea9  = mean(Ref_5x5_90th, na.rm = T),
+    varRefArea9  = var(Ref_5x5_90th, na.rm = T),
+
+    meanRefcomp = mean(RefComposite,na.rm = T),
+    varRefcomp = var(RefComposite,na.rm = T),
+    meanRefcomp1 = mean(RefComposite_5x5_10th,na.rm = T),
+    #varRefcomp1 = var(RefComposite_5x5_10th,na.rm = T),
+    meanRefcomp5 = mean(RefComposite_5x5_50th,na.rm = T),
+    varRefcomp5 = var(RefComposite_5x5_50th,na.rm = T),
+    meanRefcomp9 = mean(RefComposite_5x5_90th,na.rm = T),
+    varRefcomp9 = var(RefComposite_5x5_90th,na.rm = T),
+
+    rhoHV = mean(RhoHV, na.rm = T),
+    rhoHV1 = mean(RhoHV_5x5_10th, na.rm = T),
+    rhoHV5 = mean(RhoHV_5x5_50th, na.rm = T),
+    rhoHV9 = mean(RhoHV_5x5_90th, na.rm = T),
+
+    zdr   = mean(Zdr, na.rm = T),
+    zdr1   = mean(Zdr_5x5_10th, na.rm = T),
+    zdr5   = mean(Zdr_5x5_50th, na.rm = T),
+    zdr9   = mean(Zdr_5x5_90th, na.rm = T),
+
+    #kdp   = rate_kdp(Kdp, minutes_past),
+
+    target = log1p(mean(Expected)),
+    meanRef = mean(Ref,na.rm = T),
+    varRef = var(Ref, na.rm = T),
+    sumRef = sum(Ref,na.rm = T),
+
+    yy1 = mean(Ref,na.rm = T) / mean(radardist_km, na.rm = T),
+    #yy2 = mean(Ref_5x5_90th, na.rm = T) - mean(Ref_5x5_50th, na.rm = T),
+    yy3 = mean(Ref_5x5_90th,na.rm = T) / mean(radardist_km, na.rm = T),
+    yy4 = mean(Ref_5x5_50th,na.rm = T) / mean(radardist_km, na.rm = T),
+
     records = .N,
     naCounts = sum(is.na(Ref))
+    #mp50 =  mpalmer(RefComposite_5x5_50th, minutes_past),
+    #mp90 =  mpalmer(RefComposite_5x5_90th, minutes_past),
+    #mp = mpalmer(Ref, minutes_past)
     ),Id][records>naCounts,],destination_frame="train.hex")
     
     summary(trainHex)
 
-rfHex<-h2o.randomForest(x=c("dist", "refArea5", "refArea9", "meanRefcomp","meanRefcomp5","meanRefcomp5", "zdr",
-                           "zdr5", "zdr9", "meanRef","sumRef", "records","naCounts"
+rfHex<-h2o.randomForest(x=c("dist", "refArea1", "varRefArea1", "refArea5", "varRefArea5", "refArea9", "varRefArea9",
+                            "meanRefcomp", "varRefcomp","meanRefcomp1","meanRefcomp5", "varRefcomp5","meanRefcomp9", "varRefcomp9",
+                            "rhoHV","rhoHV1","rhoHV5","rhoHV9",
+                            "zdr", "zdr1", "zdr5", "zdr9",
+                            #"kdp",
+                            #"mp50","mp90","mp",
+                            "meanRef", "varRef", "sumRef", "records","naCounts", 
+                            "yy1", "yy3", "yy4"
                         ),
     y="target",training_frame=trainHex,model_id="rfStarter.hex", ntrees=500, sample_rate = 0.7)
 rfHex
 h2o.varimp(rfHex)
 rm(train)
 
-test<-fread("C:/Users/Fighton/Desktop/train/test.csv",select=c(1,2,3,4,6,7,8,10,11,16,18, 19))
+test<-fread("../test.csv",select=c(1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20))
+
+# test$dt <- time_difference(te_raw$minutes_past)
+# test$mp5 <- marshall_palmer(te_raw$Ref_5x5_50th)
+# test$mp9 <- marshall_palmer(te_raw$Ref_5x5_90th)
 
 #Cut off Ref values < 0
 test$Ref_5x5_50th[which(test$Ref_5x5_50th < 0)] <- NA
 test$Ref_5x5_90th[which(test$Ref_5x5_90th < 0)] <- NA
 test$RefComposite[which(test$RefComposite < 0)] <- NA
+test$RefComposite_5x5_10th[which(test$RefComposite_5x5_10th < 0)] <- NA
 test$RefComposite_5x5_50th[which(test$RefComposite_5x5_50th < 0)] <- NA
 test$RefComposite_5x5_90th[which(test$RefComposite_5x5_90th < 0)] <- NA
 test$Ref[which(test$Ref < 0)] <- NA
 
 
 testHex<-as.h2o(test[,.(
-     dist   = mean(radardist_km, na.rm = T),
-      refArea5   = mean(Ref_5x5_50th, na.rm = T),
-      refArea9  = mean(Ref_5x5_90th, na.rm = T),
-     meanRefcomp = mean(RefComposite,na.rm=T),
-     meanRefcomp5 = mean(RefComposite_5x5_50th,na.rm=T),
-     meanRefcomp9 = mean(RefComposite_5x5_90th,na.rm=T),
-     zdr   = mean(Zdr, na.rm = T),
-     zdr5   = mean(Zdr_5x5_50th, na.rm = T),
-     zdr9   = mean(Zdr_5x5_90th, na.rm = T),
-      
+    dist   = mean(radardist_km, na.rm = T),
+
+    refArea1   = mean(Ref_5x5_10th, na.rm = T),
+    varRefArea1   = var(Ref_5x5_10th, na.rm = T),
+    refArea5   = mean(Ref_5x5_50th, na.rm = T),
+    varRefArea5   = var(Ref_5x5_50th, na.rm = T),
+    refArea9  = mean(Ref_5x5_90th, na.rm = T),
+    varRefArea9  = var(Ref_5x5_90th, na.rm = T),
+
+    meanRefcomp = mean(RefComposite,na.rm=T),
+    varRefcomp = var(RefComposite,na.rm = T),
+    meanRefcomp1 = mean(RefComposite_5x5_10th,na.rm = T),
+    #varRefcomp1 = var(RefComposite_5x5_10th,na.rm = T),
+    meanRefcomp5 = mean(RefComposite_5x5_50th,na.rm = T),
+    varRefcomp5 = var(RefComposite_5x5_50th,na.rm = T),
+    meanRefcomp9 = mean(RefComposite_5x5_90th,na.rm = T),
+    varRefcomp9 = var(RefComposite_5x5_90th,na.rm = T),
+
+    rhoHV = mean(RhoHV, na.rm = T),
+    rhoHV1 = mean(RhoHV_5x5_10th, na.rm = T),
+    rhoHV5 = mean(RhoHV_5x5_50th, na.rm = T),
+    rhoHV9 = mean(RhoHV_5x5_90th, na.rm = T),
+
+    zdr   = mean(Zdr, na.rm = T),
+    zdr1   = mean(Zdr_5x5_10th, na.rm = T),
+    zdr5   = mean(Zdr_5x5_50th, na.rm = T),
+    zdr9   = mean(Zdr_5x5_90th, na.rm = T),
+
+    #kdp   = rate_kdp(Kdp, minutes_past),
+    
     meanRef = mean(Ref,na.rm=T),
+    varRef = var(Ref, na.rm=T),
     sumRef = sum(Ref,na.rm=T),
+
+    yy1 = mean(Ref,na.rm = T) / mean(radardist_km, na.rm = T),
+    #yy2 = mean(Ref_5x5_90th, na.rm = T) - mean(Ref_5x5_50th, na.rm = T),
+    yy3 = mean(Ref_5x5_90th,na.rm = T) / mean(radardist_km, na.rm = T),
+    yy4 = mean(Ref_5x5_50th,na.rm = T) / mean(radardist_km, na.rm = T),
+
     records = .N,
     naCounts = sum(is.na(Ref))
+    #mp50 =  mpalmer(RefComposite_5x5_50th, minutes_past),
+    #mp90 =  mpalmer(RefComposite_5x5_90th, minutes_past),
+    #mp = mpalmer(Ref, minutes_past)
     ),Id],destination_frame="test.hex")
     
     summary(testHex)
 
-submission<-fread("C:/Users/Fighton/Desktop/sample/sample_solution.csv")
+submission<-fread("../sample_solution.csv")
 predictions<-as.data.frame(h2o.predict(rfHex,testHex))
 submission$Expected<- 0.9 * expm1(predictions$predict) + 0.1 * submission$Expected
 
