@@ -124,6 +124,9 @@ trainHex<-as.h2o(train[,.(
     #yy2 = mean(Ref_5x5_90th, na.rm = T) - mean(Ref_5x5_50th, na.rm = T),
     yy3 = mean(Ref_5x5_90th,na.rm = T) / mean(radardist_km, na.rm = T),
     yy4 = mean(Ref_5x5_50th,na.rm = T) / mean(radardist_km, na.rm = T),
+    yy5 = mean(RefComposite,na.rm = T) / mean(radardist_km, na.rm = T),
+    yy6 = mean(RefComposite_5x5_90th,na.rm = T) / mean(radardist_km, na.rm = T),
+    yy7 = mean(RefComposite_5x5_50th,na.rm = T) / mean(radardist_km, na.rm = T),
 
     records = .N,
     naCounts = sum(is.na(Ref))
@@ -141,7 +144,7 @@ rfHex<-h2o.randomForest(x=c("dist", "refArea1", "varRefArea1", "refArea5", "varR
                             #"kdp",
                             #"mp50","mp90","mp",
                             "meanRef", "varRef", "sumRef", "records","naCounts", 
-                            "yy1", "yy3", "yy4"
+                            "yy1", "yy3", "yy4", "yy5", "yy6", "yy7"
                         ),
     y="target",training_frame=trainHex,model_id="rfStarter.hex", ntrees=500, sample_rate = 0.7)
 rfHex
@@ -203,6 +206,9 @@ testHex<-as.h2o(test[,.(
     #yy2 = mean(Ref_5x5_90th, na.rm = T) - mean(Ref_5x5_50th, na.rm = T),
     yy3 = mean(Ref_5x5_90th,na.rm = T) / mean(radardist_km, na.rm = T),
     yy4 = mean(Ref_5x5_50th,na.rm = T) / mean(radardist_km, na.rm = T),
+    yy5 = mean(RefComposite,na.rm = T) / mean(radardist_km, na.rm = T),
+    yy6 = mean(RefComposite_5x5_90th,na.rm = T) / mean(radardist_km, na.rm = T),
+    yy7 = mean(RefComposite_5x5_50th,na.rm = T) / mean(radardist_km, na.rm = T),
 
     records = .N,
     naCounts = sum(is.na(Ref))
