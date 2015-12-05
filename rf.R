@@ -25,6 +25,13 @@ library(data.table)
 library(Metrics)
 h2o.init(nthreads=-1)
 
+ref_diff <- function(ref) {
+    diff <-
+    c(ref[1:length(ref) - 1]) -
+    c(ref[2:length(ref)])
+    return(mean(diff))
+}
+
 mpalmer <- function(ref, minutes_past) {
   # order reflectivity values and minutes_past
   sort_min_index = order(minutes_past)
@@ -53,7 +60,6 @@ rate_kdp <- function(Kdp, minutes_past) {
     c(minutes_past[-length(minutes_past)], 60) -
     c(0, minutes_past[-length(minutes_past)])
   valid_time = valid_time / 60
-
   # calculate hourly rain rates using S and Z formula weighted by valid times
   return(sum((sign(Kdp)*(4.06)*(abs(Kdp) **.0866)*valid_time), na.rm=TRUE))
 }
@@ -127,6 +133,12 @@ trainHex<-as.h2o(train[,.(
     yy5 = mean(RefComposite,na.rm = T) / mean(radardist_km, na.rm = T),
     yy6 = mean(RefComposite_5x5_90th,na.rm = T) / mean(radardist_km, na.rm = T),
     yy7 = mean(RefComposite_5x5_50th,na.rm = T) / mean(radardist_km, na.rm = T),
+    yy8 = ref_diff(Ref),
+    yy9 = ref_diff(Ref_5x5_50th),
+    yy10 = ref_diff(Ref_5x5_90th),
+    yy11 = ref_diff(RefComposite),
+    yy12 = ref_diff(RefComposite_5x5_50th),
+    yy13 = ref_diff(RefComposite_5x5_90th),
 
     records = .N,
     naCounts = sum(is.na(Ref))
@@ -144,7 +156,7 @@ rfHex<-h2o.randomForest(x=c("dist", "refArea1", "varRefArea1", "refArea5", "varR
                             #"kdp",
                             #"mp50","mp90","mp",
                             "meanRef", "varRef", "sumRef", "records","naCounts", 
-                            "yy1", "yy3", "yy4", "yy5", "yy6", "yy7"
+                            "yy1", "yy3", "yy4", "yy5", "yy6", "yy7","yy8","yy9","yy10","yy11","yy12","yy13"
                         ),
     y="target",training_frame=trainHex,model_id="rfStarter.hex", ntrees=500, sample_rate = 0.7)
 rfHex
@@ -209,6 +221,12 @@ testHex<-as.h2o(test[,.(
     yy5 = mean(RefComposite,na.rm = T) / mean(radardist_km, na.rm = T),
     yy6 = mean(RefComposite_5x5_90th,na.rm = T) / mean(radardist_km, na.rm = T),
     yy7 = mean(RefComposite_5x5_50th,na.rm = T) / mean(radardist_km, na.rm = T),
+    yy8 = ref_diff(Ref),
+    yy9 = ref_diff(Ref_5x5_50th),
+    yy10 = ref_diff(Ref_5x5_90th),
+    yy11 = ref_diff(RefComposite),
+    yy12 = ref_diff(RefComposite_5x5_50th),
+    yy13 = ref_diff(RefComposite_5x5_90th),
 
     records = .N,
     naCounts = sum(is.na(Ref))
