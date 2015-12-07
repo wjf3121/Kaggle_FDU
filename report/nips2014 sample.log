@@ -1,9 +1,9 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.10.1)  6 DEC 2015 20:50
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.10.1)  6 DEC 2015 14:12
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**report.tex
-(./report.tex
+**"nips2014 sample.tex"
+(./nips2014 sample.tex
 LaTeX2e <2015/01/01>
 Babel <3.9l> and hyphenation patterns for 79 languages loaded.
 (/usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
@@ -209,64 +209,32 @@ tly
 )
 \Hy@SectionHShift=\skip43
 )
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphicx.sty
-Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+(./nips2014 sample.aux)
+\openout1 = `"nips2014 sample.aux"'.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/graphics.sty
-Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 55.
+LaTeX Font Info:    ... okay on input line 55.
+LaTeX Font Info:    Try loading font information for OT1+ptm on input line 55.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/graphics/trig.sty
-Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
-)
-(/usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/graphics.cfg
-File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
-)
-Package graphics Info: Driver file: xetex.def on input line 94.
-)
-\Gin@req@height=\dimen110
-\Gin@req@width=\dimen111
-)
-(./report.aux
-
-LaTeX Warning: Label `fig:side:a' multiply defined.
-
-
-LaTeX Warning: Label `fig:side:b' multiply defined.
-
-
-LaTeX Warning: Label `fig:side:a' multiply defined.
-
-
-LaTeX Warning: Label `fig:side:b' multiply defined.
-
-
-LaTeX Warning: Label `fig:side:c' multiply defined.
-
-)
-\openout1 = `report.aux'.
-
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Try loading font information for OT1+ptm on input line 38.
- (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+(/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
 File: ot1ptm.fd 2001/06/04 font definitions for OT1/ptm.
 )
 \AtBeginShipoutBox=\box29
-Package hyperref Info: Link coloring OFF on input line 38.
+Package hyperref Info: Link coloring OFF on input line 55.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2012/10/27 v2.43 Cross-referencing by name of section
@@ -276,161 +244,81 @@ Package: gettitlestring 2010/12/03 v1.4 Cleanup title references (HO)
 )
 \c@section@level=\count104
 )
-LaTeX Info: Redefining \ref on input line 38.
-LaTeX Info: Redefining \pageref on input line 38.
-LaTeX Info: Redefining \nameref on input line 38.
+LaTeX Info: Redefining \ref on input line 55.
+LaTeX Info: Redefining \pageref on input line 55.
+LaTeX Info: Redefining \nameref on input line 55.
 
-(./report.out) (./report.out)
+(./nips2014 sample.out) (./nips2014 sample.out)
 \@outlinefile=\write3
-\openout3 = `report.out'.
+\openout3 = `"nips2014 sample.out"'.
 
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <17.28> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 59.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <7> on input line 42.
+(Font)              <7> on input line 59.
 LaTeX Font Info:    External font `cmex10' loaded for size
-(Font)              <5> on input line 42.
+(Font)              <5> on input line 59.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 42.
-LaTeX Font Info:    Try loading font information for OT1+pcr on input line 42.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 59.
+LaTeX Font Info:    Try loading font information for OT1+pcr on input line 59.
 
 (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
 File: ot1pcr.fd 2001/06/04 font definitions for OT1/pcr.
 )
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <12> not available
-(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 43.
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 60.
 
 (/usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
 File: se-ascii-print.def 2011/12/02 v1.10 stringenc: Printable ASCII characters
 
 )
-Underfull \hbox (badness 10000) in paragraph at lines 54--57
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 54--57
-
- []
-
-File: distribution.png Graphic file (type QTm)
-<use  "distribution.png" >
-File: distribution-70.png Graphic file (type QTm)
- <use  "distribution-70.png" >
-Overfull \hbox (11.79999pt too wide) in paragraph at lines 70--71
-[][] 
- []
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 79--84
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 79--84
-
- []
-
 [1
 
-]
-LaTeX Font Info:    Try loading font information for OMS+ptm on input line 85.
+] [2]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9> on input line 249.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 249.
+ [3]
+LaTeX Font Info:    Try loading font information for OMS+ptm on input line 321.
+
  (/usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omsptm.fd
 File: omsptm.fd 
 )
 LaTeX Font Info:    Font shape `OMS/ptm/m/n' in size <10> not available
-(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 85.
-File: feature1.png Graphic file (type QTm)
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 321.
 
-<use  "feature1.png" >
-File: feature6.png Graphic file (type QTm)
- <use  "feature6.png" >
-File: feature2.png Graphic file (type QTm)
- <use  "feature2.png" >
-Overfull \hbox (10.32729pt too wide) in paragraph at lines 111--112
-[][] 
- []
-
-File: feature4.png Graphic file (type QTm)
-<use  "feature4.png" >
-File: feature3.png Graphic file (type QTm)
- <use  "feature3.png" >
-File: feature5.png Graphic file (type QTm)
- <use  "feature5.png" >
-Overfull \hbox (10.32729pt too wide) in paragraph at lines 133--134
-[][] 
+Underfull \hbox (badness 10000) in paragraph at lines 369--371
+[]\OT1/ptm/m/n/10 Install the Mi-crosoft Save as PDF Of-fice 2007 Add-in from [
+]$\OT1/pcr/m/n/10 http :
  []
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--140
-
+Underfull \hbox (badness 10000) in paragraph at lines 369--371
+\OT1/pcr/m/n/10 / / www . microsoft . com / downloads / details . aspx ? displa
+ylang =
  []
 
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--140
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 138--140
-
- []
-
-[2]
-Underfull \hbox (badness 10000) in paragraph at lines 144--150
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 144--150
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 144--150
-
- []
-
-
-Underfull \hbox (badness 1342) in paragraph at lines 144--150
-\OT1/ptm/m/n/10 The sec-ond new fea-ture us-ing radard-ist[]km$[]$ seems more r
-ea-son-able be-cause if the cover
- []
-
-[3]
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
+[4]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/it' in size <10> not available
-(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 247.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 254.
-[4] [5]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 254.
- (./report.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 254.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 254.
-
-
-LaTeX Warning: There were multiply-defined labels.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 254.
+(Font)              Font shape `OT1/ptm/b/it' tried instead on input line 437.
+LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <9> not available
+(Font)              Font shape `OT1/ptm/b/n' tried instead on input line 452.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 455.
+ [5]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 455.
+ (./nips2014 sample.aux)
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 455.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 455.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 455.
  ) 
 Here is how much of TeX's memory you used:
- 8724 strings out of 493706
- 121525 string characters out of 6145769
- 192985 words of memory out of 5000000
- 12018 multiletter control sequences out of 15000+600000
- 8885 words of font info for 25 fonts, out of 8000000 for 9000
+ 8548 strings out of 493706
+ 119266 string characters out of 6145769
+ 191642 words of memory out of 5000000
+ 11860 multiletter control sequences out of 15000+600000
+ 13983 words of font info for 37 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
- 37i,9n,45p,578b,381s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 37i,12n,45p,216b,444s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on report.pdf (5 pages).
+Output written on nips2014 sample.pdf (5 pages).

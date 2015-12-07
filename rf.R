@@ -25,11 +25,28 @@ library(data.table)
 library(Metrics)
 h2o.init(nthreads=-1)
 
+calc_accelerate <- function(ref, minutes_past) {
+    sort_min_index = order(minutes_past)
+    diff <-
+    c(ref[1:length(ref) - 1]) -
+    c(ref[2:length(ref)])
+
+    minutes_past <- minutes_past[sort_min_index]
+    ref <- ref[sort_min_index]
+  
+  # calculate the length of time for which each reflectivity value is valid
+    valid_time <-
+        c(minutes_past[-length(minutes_past)], 60) -
+        c(0, minutes_past[-length(minutes_past)])
+    valid_time = valid_time / 60
+    return(mean(diff / valid_time, na.rm=TRUE))
+}
+
 ref_diff <- function(ref) {
     diff <-
     c(ref[1:length(ref) - 1]) -
     c(ref[2:length(ref)])
-    return(mean(diff))
+    return(mean(diff, na.rm=TRUE))
 }
 
 mpalmer <- function(ref, minutes_past) {
@@ -108,6 +125,8 @@ trainHex<-as.h2o(train[,.(
     varRefcomp5 = var(RefComposite_5x5_50th,na.rm = T),
     meanRefcomp9 = mean(RefComposite_5x5_90th,na.rm = T),
     varRefcomp9 = var(RefComposite_5x5_90th,na.rm = T),
+    maxRefcomp = max(RefComposite, na.rm = T),
+    minRefcomp = min(RefComposite, na.rm = T),
 
     rhoHV = mean(RhoHV, na.rm = T),
     rhoHV1 = mean(RhoHV_5x5_10th, na.rm = T),
@@ -120,11 +139,15 @@ trainHex<-as.h2o(train[,.(
     zdr9   = mean(Zdr_5x5_90th, na.rm = T),
 
     #kdp   = rate_kdp(Kdp, minutes_past),
+    maxKdp = max(Kdp, na.rm = T),
+    minKdp = min(Kdp, na.rm = T),
 
     target = log1p(mean(Expected)),
     meanRef = mean(Ref,na.rm = T),
     varRef = var(Ref, na.rm = T),
     sumRef = sum(Ref,na.rm = T),
+    maxRef = max(Ref, na.rm = T),
+    minRef = min(Ref, na.rm = T),
 
     yy1 = mean(Ref,na.rm = T) / mean(radardist_km, na.rm = T),
     #yy2 = mean(Ref_5x5_90th, na.rm = T) - mean(Ref_5x5_50th, na.rm = T),
@@ -139,24 +162,26 @@ trainHex<-as.h2o(train[,.(
     yy11 = ref_diff(RefComposite),
     yy12 = ref_diff(RefComposite_5x5_50th),
     yy13 = ref_diff(RefComposite_5x5_90th),
-
     records = .N,
     naCounts = sum(is.na(Ref))
     #mp50 =  mpalmer(RefComposite_5x5_50th, minutes_past),
     #mp90 =  mpalmer(RefComposite_5x5_90th, minutes_past),
-    #mp = mpalmer(Ref, minutes_past)
+    #mp = log1p(mpalmer(Ref, minutes_past))
     ),Id][records>naCounts,],destination_frame="train.hex")
     
     summary(trainHex)
 
 rfHex<-h2o.randomForest(x=c("dist", "refArea1", "varRefArea1", "refArea5", "varRefArea5", "refArea9", "varRefArea9",
                             "meanRefcomp", "varRefcomp","meanRefcomp1","meanRefcomp5", "varRefcomp5","meanRefcomp9", "varRefcomp9",
+                            "maxRefcomp", "minRefcomp",
                             "rhoHV","rhoHV1","rhoHV5","rhoHV9",
                             "zdr", "zdr1", "zdr5", "zdr9",
-                            #"kdp",
+                            "maxKdp", "minKdp",
                             #"mp50","mp90","mp",
                             "meanRef", "varRef", "sumRef", "records","naCounts", 
-                            "yy1", "yy3", "yy4", "yy5", "yy6", "yy7","yy8","yy9","yy10","yy11","yy12","yy13"
+                            "maxRef", "minRef",
+                            "yy1", "yy3", "yy4", "yy5", "yy6", "yy7","yy8","yy9",
+                            "yy10","yy11","yy12","yy13"
                         ),
     y="target",training_frame=trainHex,model_id="rfStarter.hex", ntrees=500, sample_rate = 0.7)
 rfHex
@@ -197,6 +222,8 @@ testHex<-as.h2o(test[,.(
     varRefcomp5 = var(RefComposite_5x5_50th,na.rm = T),
     meanRefcomp9 = mean(RefComposite_5x5_90th,na.rm = T),
     varRefcomp9 = var(RefComposite_5x5_90th,na.rm = T),
+    maxRefcomp = max(RefComposite, na.rm = T),
+    minRefcomp = min(RefComposite, na.rm = T),
 
     rhoHV = mean(RhoHV, na.rm = T),
     rhoHV1 = mean(RhoHV_5x5_10th, na.rm = T),
@@ -209,10 +236,14 @@ testHex<-as.h2o(test[,.(
     zdr9   = mean(Zdr_5x5_90th, na.rm = T),
 
     #kdp   = rate_kdp(Kdp, minutes_past),
+    maxKdp = max(Kdp, na.rm = T),
+    minKdp = min(Kdp, na.rm = T),
     
     meanRef = mean(Ref,na.rm=T),
     varRef = var(Ref, na.rm=T),
     sumRef = sum(Ref,na.rm=T),
+    maxRef = max(Ref, na.rm = T),
+    minRef = min(Ref, na.rm = T),
 
     yy1 = mean(Ref,na.rm = T) / mean(radardist_km, na.rm = T),
     #yy2 = mean(Ref_5x5_90th, na.rm = T) - mean(Ref_5x5_50th, na.rm = T),
@@ -232,7 +263,7 @@ testHex<-as.h2o(test[,.(
     naCounts = sum(is.na(Ref))
     #mp50 =  mpalmer(RefComposite_5x5_50th, minutes_past),
     #mp90 =  mpalmer(RefComposite_5x5_90th, minutes_past),
-    #mp = mpalmer(Ref, minutes_past)
+    #mp = log1p(mpalmer(Ref, minutes_past))
     ),Id],destination_frame="test.hex")
     
     summary(testHex)

@@ -1,0 +1,106 @@
+PWD /Users/wujunfeng/Documents/code/567pj/Kaggle_FDU/report
+INPUT /usr/local/texlive/2015/texmf.cnf
+INPUT /usr/local/texlive/2015/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2015/texmf-var/web2c/xetex/xelatex.fmt
+INPUT nips2014 sample.tex
+OUTPUT nips2014 sample.log
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/size10.clo
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/base/size10.clo
+INPUT nips14submit_e.sty
+INPUT nips14submit_e.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/eso-pic/eso-pic.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/atbegshi.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/graphics/keyval.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/xcolor/xcolor.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/color.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/xelatex/xetex-def/xetex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/xelatex/xetex-def/xetex.def
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/map/fontname/texfonts.map
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/helvetic/phvb.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/times.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/times.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hyperref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hyperref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/auxhook.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/auxhook.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/pd1enc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/pd1enc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/latexconfig/hyperref.cfg
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/url/url.sty
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/zapfding/pzdr.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hxetex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/hxetex.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/puenc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/puenc.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/stringenc.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/stringenc.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty
+INPUT nips2014 sample.aux
+INPUT nips2014 sample.aux
+OUTPUT nips2014 sample.aux
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1ptm.fd
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/hyperref/nameref.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/gettitlestring.sty
+INPUT nips2014 sample.out
+INPUT nips2014 sample.out
+INPUT nips2014 sample.out
+INPUT nips2014 sample.out
+OUTPUT nips2014 sample.out
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/ot1pcr.fd
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/courier/pcrr7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
+INPUT /usr/local/texlive/2015/texmf-dist/tex/generic/oberdiek/se-ascii-print.def
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmrc7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr9.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmr6.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmmi9.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmsy9.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmr7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omsptm.fd
+INPUT /usr/local/texlive/2015/texmf-dist/tex/latex/psnfss/omsptm.fd
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmbi7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmri7t.tfm
+INPUT /usr/local/texlive/2015/texmf-dist/fonts/tfm/adobe/times/ptmb7t.tfm
+INPUT nips2014 sample.aux

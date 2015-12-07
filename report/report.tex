@@ -19,18 +19,7 @@ Address \\
 Junfeng Wu \\
 Affiliation \\
 Address \\
-\texttt{email} \\
-\And
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
-\And
-Coauthor \\
-Affiliation \\
-Address \\
-\texttt{email} \\
-(if needed)\\
+\texttt{email}
 }
 
 % The \author macro works with any number of authors. There are two commands
@@ -45,7 +34,7 @@ Address \\
 \newcommand{\new}{\marginpar{NEW}}
 
 %\nipsfinalcopy % Uncomment for camera-ready version
-
+\nipsfinalcopy
 \begin{document}
 
 
@@ -88,7 +77,6 @@ It is also essential to eliminate abnormal data and some outliers. We firstly el
 \section{Feature Selection}
 \subsection{Basic matrice}
 From the official data description, we have to generate only one line of feature value for each given data group by ID. Thus, we firstly transfer the given data using mean, variance or summation.\\
-
 \\
 We first plot some density graph and saw that the mean value of Ref seems correlated with expected value. The variance of Ref is different from mean but we can see from the plot that most variance is relatively low with expected value lower than 2. Thus, using these features could be helpful for the prediction.\\
 \\
@@ -186,8 +174,69 @@ Our first attempt is using Random Forest Algorithm. The reason is:
 \section{Evaluation}
 
 
+\subsection{Evaluation on Feature Selections}
+
+We implement the Random Forest regression based on the starter script in Kaggle Forum. In the starter script, the selected features are:
+
+\begin{itemize}
+\item mean and sum of Ref
+\item mean of Refcomp
+\item Distance
+\item Number of records and missing values
+\end{itemize}
+
+Table \ref{feat-cmp-table} shows the improvement after adding the features we selected. And Table \ref{feat-importance} shows the importance among all the selected features
+
+\begin{table}[h]
+\caption{Feature Selection Evaluation}
+\label{feat-cmp-table}
+\begin{center}
+\begin{tabular}{ll}
+\multicolumn{1}{c}{}  &\multicolumn{1}{c}{\bf MAE}
+\\ \hline \\
+Random Froest in starter script             &23.89669 \\
+Random Froest after adding features             &23.75398 \\
+\end{tabular}
+\end{center}
+\end{table}
+
+\begin{table}[h]
+\caption{Variable Importances}
+\label{feat-importance}
+\begin{center}
+\begin{tabular}{llll}
+\multicolumn{1}{c}{\bf Order}  &\multicolumn{1}{c}{\bf Variable}  &\multicolumn{1}{c}{\bf Scaled Importance} &\multicolumn{1}{c}{\bf Percentage}
+\\ \hline \\
+1 &mean of Ref\_5x5\_90th  &1.000000   &0.148810  \\
+2 &mean of Ref\_5x5\_50th  &0.631968   &0.094043  \\
+3 &mean of RefComposite\_5x5\_90th  &0.501650   &0.074651  \\
+4 &mean of Ref  &0.421761   &0.062762  \\
+5 &Radardist\_km  &0.281814  &0.041937  \\
+\ldots\\
+41 &max of Kdp  &0.063436   &0.009042\\
+42 &mean of RhoHV\_5x5\_90th  &0.062761  &0.008945\\
+43 &min of Kdp  &0.062702   &0.008937\\
+44 &mean of RhoHV\_5x5\_10th  &0.059808   &0.008524\\
+45 &mean of RhoHV\_5x5\_50th  &0.059564   &0.008490\\
+\end{tabular}
+\end{center}
+\end{table}
 
 
+\subsection{Evaluation on Different Regression Method}
+
+\begin{table}[h]
+\caption{Feature Selection Evaluation}
+\label{model-cmp-table}
+\begin{center}
+\begin{tabular}{ll}
+\multicolumn{1}{c}{\bf Model}  &\multicolumn{1}{c}{\bf MAE}
+\\ \hline \\
+xxx             &23.79669 \\
+Random Froest            &23.75398 \\
+\end{tabular}
+\end{center}
+\end{table}
 
 \subsubsection*{References}
 
